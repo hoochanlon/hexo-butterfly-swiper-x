@@ -69,4 +69,4 @@
   ```
 
 # 截图
-![](https://unpkg.zhimg.com/akilar-candyassets/image/f4783623.png)
+![](https://npm.elemecdn.com/akilar-candyassets/image/f4783623.png)
