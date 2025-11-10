@@ -39,12 +39,12 @@ swiper:
     type: id
     name: recent-posts
     index: 0
-  default_img: https://npm.elemecdn.com/akilar-candyassets/image/loading.gif
-  use_default_img_mode: true
-  swiper_css: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" 
-  swiper_js: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"   
-  custom_css: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css"
-  custom_js: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"  
+  default_img: https://cdn.jsdelivr.net/gh/hoochanlon/picx-images-hosting@master/special/loading.gif
+  default_img_mode: false
+  swiper_css: "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiper.min.css"  # swiper css依赖
+  swiper_js: "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiper.min.js"    # swiper js依赖
+  custom_css: "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiperstyle.css" # 适配主题样式补丁
+  custom_js: "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiper_init.js"   # swiper初始化方法
   ```
 
 
