@@ -55,7 +55,8 @@ swiper:
    
   在文章的`front_matter`中添加`swiper_index`配置项即可:
   
-  * 仅首页加载: `enable_page: all` 改成 `enable_page: /` 就好了。
+  * 仅首页加载: `enable_page: all` 改成 `enable_page: /`
+  * 轮播时间：[下载 /lib/swiper_init.js](https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js),修改 delay
   
   ```markdown
   ---
