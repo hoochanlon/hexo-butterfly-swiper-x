@@ -47,7 +47,10 @@ swiper:
 >  [!WARNING]
 > 由于图片与轮播内容是一体的，所以暂无法做到指定图片固定
    
-  在文章的`front_matter`中添加`swiper_index`配置项即可，只在首页加载的话，`enable_page: all` 改成 `enable_page: /` 就好了。
+  在文章的`front_matter`中添加`swiper_index`配置项即可:
+  
+  * 仅首页加载: `enable_page: all` 改成 `enable_page: /` 就好了。
+  
   ```markdown
   ---
   title: 文章标题
