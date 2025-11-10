@@ -58,7 +58,7 @@ hexo.extend.filter.register('after_generate', function () {
     layout_type: config.layout.type,
     layout_name: config.layout.name,
     layout_index: config.layout.index ? config.layout.index : 0,
-    default_img: config.default_img ? urlFor(config.default_img) : "https://npm.elemecdn.com/akilar-candyassets/image/loading.gif",
+    default_img: config.default_img ? urlFor(config.default_img) : "https://cdn.jsdelivr.net/gh/hoochanlon/picx-images-hosting@master/special/loading.gif",
     default_img_mode: default_img_mode,
     insertposition: config.insertposition ? config.insertposition : "afterbegin",
     swiper_list: swiper_list,
