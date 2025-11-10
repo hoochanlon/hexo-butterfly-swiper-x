@@ -1,12 +1,10 @@
 /* 设置全局 box-sizing */
 * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-/* 设置轮播容器背景为透明 */
-div#swiper_container {
+/* 轮播容器样式 */
+#swiper_container {
     background: rgba(255, 255, 255, 0);
 }
 
@@ -18,66 +16,23 @@ div#swiper_container {
     margin: auto;
     background: var(--global-bg);
     padding: 10px;
-    -webkit-transition: all .3s;
-    -moz-transition: all .3s;
-    -o-transition: all .3s;
-    -ms-transition: all .3s;
     transition: all .3s;
 }
 
 /* 轮播项（文章卡片） */
 .blog-slider__item {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
     display: flex;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -o-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
-}
-
-/* 活动项显示的图片 */
-.blog-slider__item.swiper-slide-active .blog-slider__img img {
-    opacity: 1;
-    -ms-filter: none;
-    filter: none;
-    -webkit-transition-delay: .3s;
-    -moz-transition-delay: .3s;
-    -o-transition-delay: .3s;
-    -ms-transition-delay: .3s;
-    transition-delay: .3s;
-}
-
-/* 轮播项内容透明度和过渡效果 */
-.blog-slider__item.swiper-slide-active .blog-slider__content > * {
-    opacity: 1;
-    -ms-filter: none;
-    filter: none;
-    -webkit-transform: none;
-    -moz-transform: none;
-    -o-transform: none;
-    -ms-transform: none;
-    transform: none;
+    transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 /* 图片容器 */
 .blog-slider__img {
     width: 200px;
-    -webkit-flex-shrink: 0;
     flex-shrink: 0;
     height: 200px;
     padding: 10px;
     border-radius: 5px;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -o-transform: translateX(0);
-    -ms-transform: translateX(0);
-    transform: translateX(0);
     overflow: hidden;
 }
 
@@ -99,14 +54,15 @@ div#swiper_container {
     height: 100%;
     object-fit: cover;
     display: block;
-    opacity: 1; /* 确保图片显示 */
-    border-radius: 5px;
-    transition: all .3s;
+    opacity: 0; /* 初始状态下不显示图片 */
+    visibility: hidden; /* 图片加载前不可见 */
+    transition: opacity 0.3s ease-in-out;
 }
 
-/* 在图片加载失败时使用默认图片 */
-.blog-slider__img img[src="${default_img}"] {
-    opacity: 1; /* 确保默认图片显示 */
+/* 图片加载完成后显示 */
+.blog-slider__img img.loaded {
+    visibility: visible;
+    opacity: 1;
 }
 
 /* 轮播项内容 */
@@ -118,82 +74,14 @@ div#swiper_container {
 /* 内容的过渡效果 */
 .blog-slider__content > * {
     opacity: 0;
-    -webkit-transform: translateY(25px);
-    -moz-transform: translateY(25px);
-    -o-transform: translateY(25px);
-    -ms-transform: translateY(25px);
     transform: translateY(25px);
-    -webkit-transition: all .4s;
-    -moz-transition: all .4s;
-    -o-transition: all .4s;
-    -ms-transition: all .4s;
     transition: all .4s;
 }
 
-/* 文章的日期 */
-.blog-slider__code {
-    color: var(--font-color);
-    margin-bottom: 0;
-    display: block;
-    font-weight: 500;
-}
-
-/* 文章标题 */
-.blog-slider__title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--font-color);
-    margin-bottom: 15px;
-    -webkit-line-clamp: 1;
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-}
-
-/* 文章简短描述 */
-.blog-slider__text {
-    color: var(--font-color);
-    -webkit-line-clamp: 1;
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    margin-bottom: 15px;
-    line-height: 1.5em;
-    width: 100%;
-    display: block;
-    word-break: break-all;
-    word-wrap: break-word;
-}
-
-/* 详情按钮 */
-.blog-slider__button {
-    display: -webkit-inline-box;
-    display: -moz-inline-box;
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-box;
-    display: inline-flex;
-    background-color: var(--btn-bg);
-    padding: 4px 14px;
-    border-radius: 8px;
-    color: var(--btn-color);
-    text-decoration: none;
-    font-weight: 500;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -o-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    text-align: center;
-    letter-spacing: 1px;
-    display: none;
-}
-
-/* 按钮的悬浮效果 */
-.blog-slider__button:hover {
-    background-color: var(--btn-hover-color);
-    color: var(--btn-color);
+/* 活动项内容 */
+.blog-slider__item.swiper-slide-active .blog-slider__content > * {
+    opacity: 1;
+    transform: none;
 }
 
 /* 轮播图分页样式 */
@@ -201,23 +89,13 @@ div#swiper_container {
     position: absolute;
     z-index: 21;
     right: 20px;
-    width: 11px !important;
-    text-align: center;
-    left: auto !important;
     top: 50%;
-    bottom: auto !important;
     transform: translateY(-50%);
-}
-
-.blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
-    margin: 8px 0;
 }
 
 .blog-slider__pagination .swiper-pagination-bullet {
     width: 11px;
     height: 11px;
-    display: block;
-    border-radius: 10px;
     background: #858585;
     opacity: .2;
     transition: all .3s;
@@ -225,67 +103,19 @@ div#swiper_container {
 
 .blog-slider__pagination .swiper-pagination-bullet-active {
     opacity: 1;
-    filter: none;
     background: var(--btn-bg);
-    height: 30px;
 }
 
 /* 响应式调整 */
 @media screen and (max-width: 600px) {
-    .blog-slider__pagination {
-        transform: translateX(-50%);
-        left: 50% !important;
-        top: 320px;
-        width: 100% !important;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
-        margin: 0 5px;
-    }
-    .blog-slider__pagination .swiper-pagination-bullet-active {
-        height: 11px;
-        width: 30px;
-    }
-    .blog-slider__button {
-        width: 100%;
-    }
-    .blog-slider__text {
-        margin-bottom: 40px;
-    }
-    .blog-slider {
-        min-height: 350px;
-        height: auto;
-        margin-top: 110px;
-        margin-bottom: 10px;
-    }
-    .blog-slider__content {
-        margin-top: -80px;
-        text-align: center;
-        padding: 0 30px;
-    }
     .blog-slider__item {
         flex-direction: column;
     }
     .blog-slider__img {
-        transform: translateY(-50%);
         width: 90%;
     }
     .blog-slider__content {
         padding-left: 10px;
         padding-right: 10px;
-    }
-    .blog-slider__pagination.swiper-pagination-clickable.swiper-pagination-bullets {
-        top: 110px;
-    }
-}
-
-@media screen and (min-width: 600px) {
-    .blog-slider {
-        height: 200px;
-    }
-    .blog-slider__img {
-        height: 200px;
     }
 }
