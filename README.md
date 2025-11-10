@@ -13,10 +13,14 @@
 * 原版项目：[Akilarlxh/hexo-butterfly-swiper](https://github.com/Akilarlxh/hexo-butterfly-swiper)
 * 原版文章： [首页轮播图](https://akilar.top/posts/8e1264d1/)
 
-# 安装
+效果：
+
+<img width="887" height="236" alt="image" src="https://github.com/user-attachments/assets/56816d57-856e-4997-b9bb-936e105507e0" />
 
 
-1. 安装插件,在博客根目录`[Blogroot]`下打开终端，运行以下指令：
+## 安装
+
+【1】安装插件,在博客根目录`[Blogroot]`下打开终端，运行以下指令：
 
   ```bash
   npm uninstall hexo-butterfly-swiper
@@ -26,8 +30,7 @@
   npm install hexo-butterfly-swiper-x --save
   ```
 
-2. 添加配置信息，以下为写法示例
-  在站点配置文件`_config.yml`或者主题配置文件`_config.butterfly.yml`中添加
+【2】在站点配置文件`_config.yml`或者主题配置文件`_config.butterfly.yml`中添加
 
   ```yaml
 swiper:
@@ -47,8 +50,27 @@ swiper:
   custom_js: "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiper_init.js"   # swiper初始化方法
   ```
 
+【3】使用方法：在文章的`front_matter`中添加`swiper_index`配置项即可
 
-3. 参数释义
+> [!note]
+> 轮播时间：下载 [/lib/swiper_init.js](https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js),修改 delay
+   
+  
+  ```markdown
+  ---
+  title: 文章标题
+  date: 创建日期
+  updated: 更新日期
+  cover: 文章封面
+  description: 文章描述
+  swiper_index: 1 #置顶轮播图顺序，需填非负整数，数字越大越靠前
+  # random_swiper_index: true # 开启随机排序
+  ---
+  ```
+
+## 附录
+
+**参数说明**
 
   |参数|备选值/类型|释义|
   |:--|:--|:--|
@@ -64,27 +86,14 @@ swiper:
   |default_img|url|【可选】默认图|
   |default_img_mode|true/false|【可选】所有文章一律使用默认图|
 
-4. 使用方法
-   
-  在文章的`front_matter`中添加`swiper_index`配置项即可:
-  
-  * 仅首页加载: `enable_page: all` 改成 `enable_page: /`
-  * 轮播时间：下载 [/lib/swiper_init.js](https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js),修改 delay
-  
-  ```markdown
-  ---
-  title: 文章标题
-  date: 创建日期
-  updated: 更新日期
-  cover: 文章封面
-  description: 文章描述
-  swiper_index: 1 #置顶轮播图顺序，需填非负整数，数字越大越靠前
-  # random_swiper_index: true # 开启随机排序
-  ---
-  ```
+**细节描述**
 
-
-# 截图
-
-<img width="887" height="236" alt="image" src="https://github.com/user-attachments/assets/56816d57-856e-4997-b9bb-936e105507e0" />
+| 功能/技术         | 描述                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------- |
+| 生成 Swiper 列表  | 遍历文章，筛选出启用 `random_swiper_index` 或 `swiper_index` 的文章，并按顺序添加到 `swiper_list` 中。                    |
+| 渲染模板         | 使用 **Pug** 模板引擎生成 HTML 内容，并将其插入到页面中。                                                              |
+| 动态注入 CSS 和 JS | 将 **Swiper** 的 CSS 和 JS 文件动态插入页面，并确保它们在页面中正确加载。                                                   |
+| Swiper 初始化    | 在页面加载完成后，通过 **Swiper** 初始化轮播图，确保它能够正确工作。                                                          |
+| 局部刷新支持       | 在 **pjax** 事件触发后，使用原生 JavaScript 重新初始化 Swiper，避免每次都需要刷新页面。                                        |
+| 浏览器环境判断      | 使用 `isBrowser()` 函数来检查当前环境是否为浏览器环境。避免在 Hexo 构建过程中（Node.js 环境）进行 DOM 操作，因为 Node.js 不支持 `document`。 |
 
