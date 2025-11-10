@@ -5,15 +5,16 @@ const path = require('path');
 const urlFor = require('hexo-util').url_for.bind(hexo);
 const util = require('hexo-util');
 
-// Hexo 中的过滤器，用于在生成页面之后注入自定义配置
 hexo.extend.filter.register('after_generate', function () {
   var posts_list = hexo.locals.get('posts').data;
   var swiper_list = [];
 
-  // 若文章的front_matter内设置了index和描述，则将其放到swiper_list内
+  // 只对启用 random_swiper_index 的文章进行排序
   for (var item of posts_list) {
-    if (item.swiper_index) {
-      let itemPath = urlFor(item.path).replace(/\/page\/\d+/, '');  // 去除分页路径
+    let itemPath = urlFor(item.path).replace(/\/page\/\d+/, '');  // 去除分页路径
+
+    // 如果文章启用了 random_swiper_index，则加入 swiper_list
+    if (item.random_swiper_index) {
       swiper_list.push({ ...item, path: itemPath });
     }
   }
@@ -22,6 +23,24 @@ hexo.extend.filter.register('after_generate', function () {
   const config = hexo.config.swiper || hexo.theme.config.swiper;
   if (!(config && config.enable)) return;
 
+  const random_swiper_index = config.random_swiper_index || false; // 读取随机排序配置
+
+  // 随机排序函数
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // 交换元素
+    }
+  }
+
+  // 仅对 swiper_list 中的文章进行随机排序
+  if (random_swiper_index) {
+    console.log('Before Shuffle:', swiper_list);  // 打印排序前的内容
+    shuffleArray(swiper_list); // 对swiper_list进行随机排序
+    console.log('After Shuffle:', swiper_list);  // 打印排序后的内容
+  }
+
+  // 获取其他配置项
   const default_img_mode = config.default_img_mode || false;
 
   const data = {
@@ -33,7 +52,7 @@ hexo.extend.filter.register('after_generate', function () {
     layout_name: config.layout.name,
     layout_index: config.layout.index ? config.layout.index : 0,
     default_img: config.default_img ? urlFor(config.default_img) : "https://npm.elemecdn.com/akilar-candyassets/image/loading.gif",
-    default_img_mode: default_img_mode,  // 新增配置项
+    default_img_mode: default_img_mode,
     insertposition: config.insertposition ? config.insertposition : "afterbegin",
     swiper_list: swiper_list,
     default_descr: config.default_descr ? config.default_descr : "再怎么看我也不知道怎么描述它的啦！",
@@ -90,5 +109,4 @@ hexo.extend.filter.register('after_generate', function () {
   hexo.extend.injector.register('body_end', user_info_js, "default");
   hexo.extend.injector.register('body_end', js_text, "default");
   hexo.extend.injector.register('head_end', css_text, "default");
-
 });
