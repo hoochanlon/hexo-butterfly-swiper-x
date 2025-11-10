@@ -22,7 +22,7 @@
     "theme-butterfly",
     "plugins"
   ],
-  "author": "akilarlxh & hoochanlon",
+  "author": ["hoochanlon", "akilarlxh"],
   "license": "Apache-2.0",
   "dependencies": {
     "pug": "^3.0.0"
