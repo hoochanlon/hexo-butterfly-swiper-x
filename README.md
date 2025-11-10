@@ -29,7 +29,7 @@ swiper:
   swiper_js: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"   
   custom_css: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css"
   custom_js: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"  
-```
+  ```
 
 
 3. 参数释义
