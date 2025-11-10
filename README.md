@@ -19,7 +19,7 @@
 1. 安装插件,在博客根目录`[Blogroot]`下打开终端，运行以下指令：
 
   ```bash
-  npm uninstall hexo-butterfly-swiper --save
+  npm uninstall hexo-butterfly-swiper
   ```
    
   ```bash
