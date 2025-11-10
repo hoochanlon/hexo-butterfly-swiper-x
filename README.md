@@ -13,22 +13,17 @@
   在站点配置文件`_config.yml`或者主题配置文件`_config.butterfly.yml`中添加
 
   ```yaml
-# hexo-butterfly-swiper
-# see https://akilar.top/posts/8e1264d1/
 swiper:
-  enable: true # 开关
-  priority: 5 #过滤器优先权
-  enable_page: all # 应用页面
-  timemode: date #date/updated
-  layout: # 挂载容器类型
+  enable: true
+  priority: 5
+  enable_page: all
+  timemode: date
+  layout:
     type: id
     name: recent-posts
     index: 0
-  default_descr: 再怎么看我也不知道怎么描述它的啦！
-  swiper_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css #swiper css依赖
-  swiper_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js #swiper js依赖
-  custom_css: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css # 适配主题样式补丁
-  custom_js: https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js # swiper初始化方法
+  default_img: https://hoochanlon.github.io/picx-images-hosting/special/author.png
+  use_default_img_mode: false
   ```
 3. 参数释义
 
@@ -42,13 +37,9 @@ swiper:
   |layout.type|id/class|【可选】挂载容器类型，填写id或class，不填则默认为id|
   |layout.name|text|【必选】挂载容器名称|
   |layout.index|0和正整数|【可选】前提是layout.type为class，因为同一页面可能有多个class，此项用来确认究竟排在第几个顺位|
-  |error_img|url|封面图片加载失败时的替换图片|
   |insertposition|text|'beforebegin'：元素自身的前面。'afterbegin'：插入元素内部的第一个子节点之前。'beforeend'：插入元素内部的最后一个子节点之后。'afterend'：插入元素自身的后面。|
-  |default_descr|text|【可选】默认文章描述|
-  |swiper_css|url|【可选】自定义的swiper依赖项css链接|
-  |swiper_js|url|【可选】自定义的swiper依赖项加js链接|
-  |custom_css|url|【可选】适配主题样式补丁|
-  |custom_js|url|【可选】swiper初始化方法|
+  |default_img|url|默认图|
+  |use_default_img_mode|true/false|【可选】所有文章一律使用默认图|
 
 4. 使用方法
   在文章的`front_matter`中添加`swiper_index`配置项即可。
