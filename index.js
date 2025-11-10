@@ -1,10 +1,14 @@
 'use strict';
-const pluginname = 'butterfly_swiper_x'
+const pluginname = 'butterfly_swiper_x';
 const pug = require('pug');
 const path = require('path');
 const urlFor = require('hexo-util').url_for.bind(hexo);
 const util = require('hexo-util');
 
+// 检查是否在浏览器环境中运行
+function isBrowser() {
+  return typeof window !== 'undefined' && typeof document !== 'undefined';
+}
 
 hexo.extend.filter.register('after_generate', function () {
   var posts_list = hexo.locals.get('posts').data;
@@ -58,11 +62,11 @@ hexo.extend.filter.register('after_generate', function () {
     layout_type: config.layout.type,
     layout_name: config.layout.name,
     layout_index: config.layout.index ? config.layout.index : 0,
-    default_img: config.default_img ? urlFor(config.default_img) : "https://cdn.jsdelivr.net/gh/hoochanlon/picx-images-hosting@master/special/loading.gif",
     default_img_mode: default_img_mode,
     insertposition: config.insertposition ? config.insertposition : "afterbegin",
     swiper_list: swiper_list,
     default_descr: config.default_descr ? config.default_descr : "再怎么看我也不知道怎么描述它的啦！",
+    default_img: config.default_img ? urlFor(config.default_img) : "https://cdn.jsdelivr.net/gh/hoochanlon/picx-images-hosting@master/special/loading.gif",
     swiper_css: config.swiper_css ? config.swiper_css : "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiper.min.css",
     swiper_js: config.swiper_js ? config.swiper_js : "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiper.min.js",
     custom_css: config.custom_css ? config.custom_css : "https://cdn.jsdelivr.net/npm/hexo-butterfly-swiper-x/lib/swiperstyle.css",
@@ -117,3 +121,38 @@ hexo.extend.filter.register('after_generate', function () {
   hexo.extend.injector.register('body_end', js_text, "default");
   hexo.extend.injector.register('head_end', css_text, "default");
 });
+
+// 注册优先级助手
+hexo.extend.helper.register('priority', function() {
+  const pre_priority = hexo.config.swiper.priority || hexo.theme.config.swiper.priority;
+  const priority = pre_priority ? pre_priority : 10;
+  return priority;
+});
+
+// Swiper 初始化函数（仅在浏览器环境中执行）
+function initializeSwiper() {
+  if (!isBrowser()) return; // 确保仅在浏览器环境中执行
+
+  // 销毁已有的 Swiper 实例
+  if (window.swiperInstance) {
+    window.swiperInstance.destroy();
+  }
+
+  // 重新初始化 Swiper
+  window.swiperInstance = new Swiper('.swiper-container', {
+    loop: true, // 循环播放
+    autoplay: { delay: 5000 }, // 自动播放
+    slidesPerView: 1, // 一次显示一个幻灯片
+    spaceBetween: 10, // 幻灯片之间的间隔
+    // 其他配置项
+  });
+}
+
+// 使用原生 JavaScript 监听 pjax 事件并重新初始化 Swiper
+if (isBrowser()) {
+  document.addEventListener('pjax:success', function() {
+    setTimeout(() => {
+      initializeSwiper();  // 延迟初始化，确保容器已加载
+    }, 100); // 100ms 延迟
+  });
+}
