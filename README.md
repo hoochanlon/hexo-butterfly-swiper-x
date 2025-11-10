@@ -24,8 +24,14 @@ swiper:
     name: recent-posts
     index: 0
   default_img: https://hoochanlon.github.io/picx-images-hosting/special/author.png
-  use_default_img_mode: false
-  ```
+  use_default_img_mode: true
+  swiper_css: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" 
+  swiper_js: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"   
+  custom_css: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css"
+  custom_js: "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"  
+```
+
+
 3. 参数释义
 
   |参数|备选值/类型|释义|
