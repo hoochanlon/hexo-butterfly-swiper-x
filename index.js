@@ -1,5 +1,5 @@
 'use strict';
-const pluginname = 'butterfly_swiper'
+const pluginname = 'butterfly_swiper_x'
 const pug = require('pug');
 const path = require('path');
 const urlFor = require('hexo-util').url_for.bind(hexo);
