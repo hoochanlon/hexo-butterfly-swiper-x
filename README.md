@@ -2,9 +2,9 @@
 
 >  [!Important]
 > 修复原版地址拼接错误的问题  
-> 移除了原版的error_img参数
-> 新增设置默认图及默认图模式
-> 新增随机排序
+> 移除了原版的error_img参数   
+> 新增设置默认图及默认图模式   
+> 新增随机排序   
 
 * 原版项目：[Akilarlxh/hexo-butterfly-swiper](https://github.com/Akilarlxh/hexo-butterfly-swiper)
 * 原版文章： [首页轮播图](https://akilar.top/posts/8e1264d1/)
