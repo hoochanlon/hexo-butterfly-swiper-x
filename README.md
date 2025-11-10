@@ -2,7 +2,9 @@
 
 >  [!Important]
 > 修复原版地址拼接错误的问题  
-> 移除了原版的error_img参数，新增设置默认图及默认图模式
+> 移除了原版的error_img参数
+> 新增设置默认图及默认图模式
+> 新增随机排序
 
 * 原版项目：[Akilarlxh/hexo-butterfly-swiper](https://github.com/Akilarlxh/hexo-butterfly-swiper)
 * 原版文章： [首页轮播图](https://akilar.top/posts/8e1264d1/)
@@ -76,8 +78,10 @@ swiper:
   cover: 文章封面
   description: 文章描述
   swiper_index: 1 #置顶轮播图顺序，需填非负整数，数字越大越靠前
+  # random_swiper_index: true # 开启随机排序
   ---
   ```
+
 
 # 截图
 ![](https://npm.elemecdn.com/akilar-candyassets/image/f4783623.png)
