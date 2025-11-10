@@ -1,8 +1,6 @@
-//- 文章容器
 .recent-post-item(style='height: auto;width: 100%')
   #swiper_container.blog-slider.swiper-container-fade.swiper-container-horizontal
     .blog-slider__wrp.swiper-wrapper(style='transition-duration: 0ms;')
-      //- 文章卡片
       each item in swiper_list
         .blog-slider__item.swiper-slide(style='width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;')
           a.blog-slider__img(href=urlFor(item.path) alt='')
@@ -15,5 +13,4 @@
             a.blog-slider__title(href=urlFor(item.path) alt='')= item.title
             .blog-slider__text= item.description ? item.description : default_descr
             a.blog-slider__button(href=urlFor(item.path) alt='') 详情
-    //- 轮播图组件 
     .blog-slider__pagination.swiper-pagination-clickable.swiper-pagination-bullets
