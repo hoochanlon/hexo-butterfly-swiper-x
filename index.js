@@ -1,23 +1,19 @@
-'use strict'
+'use strict';
 
-// 全局声明插件代号
 const pluginname = 'butterfly_swiper'
+const pug = require('pug');
+const path = require('path');
+const urlFor = require('hexo-util').url_for.bind(hexo);
+const util = require('hexo-util');
 
-// 全局声明依赖
-const pug = require('pug')  // 确保引入 pug 模块
-const path = require('path')
-const urlFor = require('hexo-util').url_for.bind(hexo)
-const util = require('hexo-util')
-
+// Hexo 中的过滤器，用于在生成页面之后注入自定义配置
 hexo.extend.filter.register('after_generate', function () {
-  // 获取所有文章
   var posts_list = hexo.locals.get('posts').data;
-  var swiper_list = []
+  var swiper_list = [];
 
   // 若文章的front_matter内设置了index和描述，则将其放到swiper_list内
   for (var item of posts_list) {
     if (item.swiper_index) {
-      // 通过 urlFor 生成正确的路径，避免修改 item.path
       let itemPath = urlFor(item.path).replace(/\/page\/\d+/, '');  // 去除分页路径
       swiper_list.push({ ...item, path: itemPath });
     }
@@ -26,6 +22,7 @@ hexo.extend.filter.register('after_generate', function () {
   // 获取整体配置项
   const config = hexo.config.swiper || hexo.theme.config.swiper;
   if (!(config && config.enable)) return;
+
 
   const data = {
     pjaxenable: hexo.theme.config.pjax.enable,
@@ -39,11 +36,12 @@ hexo.extend.filter.register('after_generate', function () {
     insertposition: config.insertposition ? config.insertposition : "afterbegin",
     swiper_list: swiper_list,
     default_descr: config.default_descr ? config.default_descr : "再怎么看我也不知道怎么描述它的啦！",
-    swiper_css: config.swiper_css ? urlFor(config.swiper_css) : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css",
-    swiper_js: config.swiper_js ? urlFor(config.swper_js) : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js",
-    custom_css: config.custom_css ? urlFor(config.custom_css) : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css",
-    custom_js: config.custom_js ? urlFor(config.custom_js) : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js",
-    urlFor: urlFor  // 将 urlFor 函数传递给模板
+    // 资源路径直接使用完整的 URL 或 `urlFor`
+    swiper_css: config.swiper_css ? config.swiper_css : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css",
+    swiper_js: config.swiper_js ? config.swiper_js : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js",
+    custom_css: config.custom_css ? config.custom_css : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css",
+    custom_js: config.custom_js ? config.custom_js : "https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js", // 确保这里是正确的路径
+    urlFor: urlFor
   };
 
   // 渲染页面
