@@ -31,7 +31,7 @@
   ```
 
 > [!TIP]
-> 也可使用随机图片API作为默认图，如bing、lorem Picsum、loremFlickr、acg
+> 也可使用随机图片API作为默认图，如：bing、lorem Picsum、loremFlickr、loliapi等
 > * https://picsum.photos/1200/600
 > * https://bingw.jasonzeng.dev/?index=random
 > * https://random-picture.vercel.app/api 
